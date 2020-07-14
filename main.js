@@ -10,9 +10,10 @@ class Traveler {
     }
 
     eat() {
-        this.food -= 1
         if (this.food < 1) {
             this.isHealthy = false
+        } else {
+            this.food -= 1
         }
     }
 }
@@ -24,32 +25,34 @@ class Wagon {
     }
 
     getAvailableSeatCount() {
-       
+
         let emptySeats = this.capacity - this.passengers.length
-        return(emptySeats)
+        return (emptySeats)
 
     }
 
 
     join(traveler) {
-        if (this.getAvailableSeatCount() >= 1){
+        if (this.getAvailableSeatCount() >= 1) {
             this.passengers.push(traveler)
         }
     }
 
     shouldQuarantine() {
-       let quarintine = this.passengers.some(traveler => traveler.isHealthy === false)
-       return quarintine
+        let quarintine = this.passengers.some(traveler => traveler.isHealthy === false)
+        return quarintine
 
     }
 
     totalFood() {
-        
-        // let totals = totals + this.food 
-        // return totals
+        let totals = 0
+        for (let index = 0; index < this.passengers.length; index++) {
+            const foodcount = this.passengers[index].food
+            totals = totals + foodcount
+        }
 
+        return totals
     }
-
 }
 
 
